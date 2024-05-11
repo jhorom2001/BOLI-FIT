@@ -1,4 +1,4 @@
-package BoliFit;
+package gimnasio.modelo;
 
 public abstract class Empleado implements Comparable<Empleado> {
 	

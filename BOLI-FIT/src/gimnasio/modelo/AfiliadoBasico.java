@@ -1,4 +1,4 @@
-package BoliFit;
+package gimnasio.modelo;
 
 public class AfiliadoBasico extends Cliente {
 	

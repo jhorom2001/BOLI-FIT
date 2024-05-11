@@ -1,4 +1,4 @@
-package BoliFit;
+package gimnasio.modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -85,7 +85,7 @@ public class Gimnasio {
 		
 	}
 	
-	public void borrarCliente(Cliente cliente) {
+	public void borrarCliente(int cod) {
 		
 		Iterator<Cliente> it=clientes.iterator();
 		
@@ -93,7 +93,7 @@ public class Gimnasio {
 			
 			Cliente c=it.next();
 			
-			if(c.getCodigoCliente()==cliente.getCodigoCliente()) {
+			if(c.getCodigoCliente()==cod) {
 				
 				it.remove();
 			}
@@ -141,7 +141,7 @@ public class Gimnasio {
 		return null;
 	}
 	
-	public void borrarEmpleado(Empleado empleado) {
+	public void borrarEmpleado(int cod) {
 		
 		Iterator<Empleado> it=empleados.iterator();
 		
@@ -149,7 +149,7 @@ public class Gimnasio {
 			
 			Empleado e=it.next();
 			
-			if(e.getCodigoEmpleado()==empleado.getCodigoEmpleado()) {
+			if(e.getCodigoEmpleado()==cod) {
 				
 				it.remove();
 			}

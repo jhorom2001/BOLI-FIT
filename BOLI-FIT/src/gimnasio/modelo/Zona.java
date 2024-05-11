@@ -1,4 +1,4 @@
-package BoliFit;
+package gimnasio.modelo;
 
 import java.util.ArrayList;
 

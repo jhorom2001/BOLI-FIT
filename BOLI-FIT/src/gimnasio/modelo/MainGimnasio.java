@@ -1,4 +1,4 @@
-package BoliFit;
+package gimnasio.modelo;
 
 import java.util.Scanner;
 
@@ -197,9 +197,7 @@ public class MainGimnasio {
 		
 		int cod=entrada.nextInt();
 		
-		Cliente cliente=gimnasio.obtenerCliente(cod);
-		
-		gimnasio.borrarCliente(cliente);
+		gimnasio.borrarCliente(cod);
 		
 		
 	}
@@ -270,9 +268,7 @@ public class MainGimnasio {
 		
 		int cod=entrada.nextInt();
 		
-		Empleado emp=gimnasio.obtenerEmpleado(cod);
-		
-		gimnasio.borrarEmpleado(emp);
+		gimnasio.borrarEmpleado(cod);
 		
 	}
 	
