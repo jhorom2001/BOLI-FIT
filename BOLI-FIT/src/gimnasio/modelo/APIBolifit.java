@@ -1,5 +1,7 @@
 package gimnasio.modelo;
 
+import java.util.ArrayList;
+
 public class APIBolifit {
 	
 	private static APIBolifit instancia=new APIBolifit();
@@ -89,10 +91,62 @@ public class APIBolifit {
 		
 	}
 	
+	public ArrayList<String> obtenerClientes() {
+		
+		ArrayList<Cliente> clientes=gimnasio.getClientes();
+		
+		ArrayList<String> clientesString=null;
+		
+		if (clientes!=null) {
+			
+			clientesString=new ArrayList<>(clientes.size());
+			
+			for (Cliente c: clientes) {
+				
+				c.getCodigoCliente();
+				
+				c.getDni();
+				
+				c.getNombre();
+				
+				c.getApellido();
+				
+				c.getDireccion();
+				
+				c.getCorreoElectronico();
+				
+				c.getNumTelefono();
+				
+			}
+		}
+		return clientesString;
+		
+	}
 	
-	
-	
-	
-	
+	public ArrayList<String> obtenerEmpleadosOrdenadosNombre(){
+		
+		gimnasio.ordenarEmpleadoNombre();
+		
+		ArrayList<Empleado> empleados=gimnasio.getEmpleados();
+		
+		ArrayList<String> empleadosString=null;
+		if (empleados!=null) {
+			
+			empleadosString=new ArrayList<String>(empleados.size());
+			
+			for(Empleado e: gimnasio.getEmpleados()) {
+				
+				e.getCodigoEmpleado();
+				
+				e.getDni();
+				
+				e.getNombre();
+				
+				e.getSueldo();
+			}
+		}
+		return empleadosString;
+	}
+
 
 }
