@@ -107,4 +107,9 @@ public class Zona {
 		return "Zona [nombre:" + nombre + ", monitores:" + monitores + ", capacidad:" + capacidad + " personas" +  "]";
 	}
 
+	public static Zona fromString(String zonaText) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
