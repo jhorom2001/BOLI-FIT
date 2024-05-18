@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public interface MostrarMonitoresControladorInterfaz {
 	
-	public String[] mostrarMonitores();
+	public String[][] mostrarMonitores();
 
 }

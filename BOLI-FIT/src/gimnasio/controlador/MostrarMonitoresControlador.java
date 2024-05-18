@@ -8,7 +8,7 @@ public class MostrarMonitoresControlador implements MostrarMonitoresControladorI
 
 	private APIBolifit api=APIBolifit.getInstance();
 	
-	public String[] mostrarMonitores() {
+	public String[][] mostrarMonitores() {
 		
 		return api.obtenerMonitoresOrdenadosNombre();
 	}

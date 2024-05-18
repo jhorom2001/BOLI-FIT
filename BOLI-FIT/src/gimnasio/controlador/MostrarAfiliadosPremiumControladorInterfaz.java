@@ -2,6 +2,6 @@ package gimnasio.controlador;
 
 public interface MostrarAfiliadosPremiumControladorInterfaz {
 	
-	public String[] mostrarAfiliadosPremium();
+	public String[][] mostrarAfiliadosPremium();
 
 }

@@ -11,4 +11,10 @@ public class BajaClienteControlador implements BajaClienteControladorInterfaz {
 		api.bajaCliente(codigo);
 	}
 
+	public int existeEmpleado(int codigo) {
+		
+		return api.buscarEmpleado(codigo);
+		
+	}
+
 }

@@ -1,14 +1,25 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
+ 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import gimnasio.controlador.AltaMonitorControlador;
+import gimnasio.controlador.AltaMonitorControladorInterfaz;
+import gimnasio.modelo.*;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
-public class AltaEmpleadoMonito extends JPanel {
+public class AltaEmpleadoMonitor extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -17,7 +28,7 @@ public class AltaEmpleadoMonito extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AltaEmpleadoMonito() {
+	public AltaEmpleadoMonitor() {
 		setLayout(null);
 		
 		JLabel lblAltaClienteMonitor = new JLabel("ALTA MONITOR");
@@ -89,6 +100,73 @@ public class AltaEmpleadoMonito extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
 		lblNewLabel.setBounds(0, 0, 704, 486);
 		add(lblNewLabel);
+		
+		JLabel errorNewLabel = new JLabel("");
+		errorNewLabel.setForeground(Color.green);
+		errorNewLabel.setBounds(79, 239, 319, 34);
+		add(errorNewLabel);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+		
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					
+					APIBolifit api = APIBolifit.getInstance();
+					
+		            Gimnasio gimnasio = api.getGimnasio();
+		            
+			
+		            AltaMonitorControladorInterfaz controlador = new AltaMonitorControlador();
+
+		            String dni = textField.getText();
+		            
+		            String nombre = textField_1.getText();
+		            
+		            String zonaText = textField_2.getText();
+		            
+		            int annos = Integer.parseInt(textField_3.getText());
+
+		            
+		            Zona zona = gimnasio.getZonas().stream()
+		                                .filter(z -> z.getNombre().equalsIgnoreCase(zonaText))
+		                                .findFirst()
+		                                .orElse(null);
+
+		            if (zona == null) {
+		                
+		                System.out.println("Zona no encontrada.");
+		                
+		                JOptionPane.showMessageDialog(JOptionPane.getFrameForComponent(btnNewButton), "Zona no encontrada");
+		                return;
+		            }
+
+		            controlador.altaMonitor(dni, nombre, zona, annos);
+		            
+		            errorNewLabel.setText("Alta finalizada");
+		            
+		            textField.setText("");
+		            
+		            textField_1.setText("");
+		            
+		            textField_2.setText("");
+		            
+		            textField_3.setText("");
+					
+				}
+				catch(NumberFormatException ex) {
+					
+					System.out.println("Formato incorrecto");
+					
+					errorNewLabel.setText("Formato numero incorrecto");
+					
+				}
+			}
+			
+			
+		});
 			
 		}
 

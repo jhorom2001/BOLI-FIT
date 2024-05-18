@@ -1,6 +1,12 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import gimnasio.controlador.MostrarAfiliadosPremiumControlador;
+import gimnasio.controlador.MostrarAfiliadosPremiumControladorInterfaz;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -12,24 +18,43 @@ public class MostrarClientesPremium extends JPanel {
 	 * Create the panel.
 	 */
 	public MostrarClientesPremium() {
+		
 		setLayout(null);
 		
-		JLabel lblClientesPremium = new JLabel("CLIENTES PREMIUM");
-		lblClientesPremium.setForeground(Color.WHITE);
-		lblClientesPremium.setFont(new Font("Arial Narrow", Font.BOLD, 33));
-		lblClientesPremium.setBounds(183, 37, 275, 36);
-		add(lblClientesPremium);
+		JLabel tituloNewLabel = new JLabel("MOSTRAR CLIENTES PAQUETE PREMIUM");
 		
-		JLabel lblCodigodninombreapellidonumerogmaildireccioncosteMensualventajas = new JLabel("CODIGO--DNI--NOMBRE--APELLIDO--NUMERO--GMAIL--DIRECCION--PISCINA--MERCHANDISING--COSTE ANUAL");
-		lblCodigodninombreapellidonumerogmaildireccioncosteMensualventajas.setForeground(Color.WHITE);
-		lblCodigodninombreapellidonumerogmaildireccioncosteMensualventajas.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblCodigodninombreapellidonumerogmaildireccioncosteMensualventajas.setBounds(10, 96, 630, 43);
-		add(lblCodigodninombreapellidonumerogmaildireccioncosteMensualventajas);
+		tituloNewLabel.setFont(new Font("Sitka Subheading", Font.PLAIN, 18));
+		
+		tituloNewLabel.setBounds(120, 0, 166, 28);
+		
+		add(tituloNewLabel);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
 		lblNewLabel.setBounds(0, -20, 674, 498);
 		add(lblNewLabel);
+		
+		
+		MostrarAfiliadosPremiumControladorInterfaz controlador=new MostrarAfiliadosPremiumControlador();
+		
+		String[][] AP= controlador.mostrarAfiliadosPremium();
+		
+		final String[] cabeceraTabla= {"CodigoCliente", "DNI", "Nombre", "Apellido", "Telefono", "Correo", "Direccion", "Piscina", "Merchandising", "Coste Anual"};
+		
+		JTable tablaMonitores=new JTable(AP,cabeceraTabla) {
+			
+			public boolean isCellEditable(int row, int column) {
+				
+		            return false;
+		         }
+		};
+		
+		tablaMonitores.setGridColor(Color.BLACK);
+
+	
+		JScrollPane scrollPane = new JScrollPane(tablaMonitores);
+		scrollPane.setBounds(10, 32, 659, 222);
+		add(scrollPane);
 
 	}
 

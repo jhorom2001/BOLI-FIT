@@ -1,10 +1,18 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
+
+import gimnasio.controlador.AltaAfiliadoPremiumControlador;
+import gimnasio.controlador.AltaAfiliadoPremiumControladorInterfaz;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
@@ -110,6 +118,62 @@ public class RegistroPremium extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
 		lblNewLabel.setBounds(-11, -16, 689, 475);
 		add(lblNewLabel);
+		
+		JLabel errorNewLabel = new JLabel("");
+		errorNewLabel.setForeground(Color.green);
+		errorNewLabel.setBounds(79, 239, 319, 34);
+		add(errorNewLabel);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					
+					AltaAfiliadoPremiumControladorInterfaz controlador=new AltaAfiliadoPremiumControlador();
+				
+					String dni=textField.getText();
+				
+					String nombre=textField_1.getText();
+				
+					String apellido = textField_2.getText();
+				
+					String telefono = textField_3.getText();
+					
+					String correo = textField_4.getText();
+					
+					String direccion = textField_5.getText();
+				
+					controlador.altaAfiliadoPremium(dni, nombre, apellido, telefono, correo, direccion);
+					
+					errorNewLabel.setText("Alta finalizada");
+					
+					textField.setText("");
+					
+				 	textField_1.setText("");
+		            
+		            textField_2.setText("");
+		            
+		            textField_3.setText("");
+		            
+		            textField_4.setText("");
+		            
+		            textField_5.setText("");
+					
+				}
+				catch(NumberFormatException ex) {
+					
+					System.out.println("Formato incorrecto");
+					
+					errorNewLabel.setText("Formato texto incorrecto");
+					
+				}
+			}
+			
+			
+		});
 
 	}
 }

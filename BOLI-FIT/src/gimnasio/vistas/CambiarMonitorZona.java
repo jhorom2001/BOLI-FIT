@@ -1,11 +1,22 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JTextField;
+
+import gimnasio.controlador.CambiarZonaMonitorControlador;
+import gimnasio.controlador.CambiarZonaMonitorControladorInterfaz;
+import gimnasio.modelo.APIBolifit;
+import gimnasio.modelo.Gimnasio;
+import gimnasio.modelo.Zona;
+
 import javax.swing.JButton;
 
 public class CambiarMonitorZona extends JPanel {
@@ -63,6 +74,79 @@ public class CambiarMonitorZona extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
 		lblNewLabel.setBounds(0, 0, 714, 495);
 		add(lblNewLabel);
+		
+		JLabel errorNewLabel = new JLabel("");
+		errorNewLabel.setForeground(Color.green);
+		errorNewLabel.setBounds(79, 239, 319, 34);
+		add(errorNewLabel);
+		
+		
+		btnCambiar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            
+		            APIBolifit api = APIBolifit.getInstance();
+		            
+		            Gimnasio gimnasio = api.getGimnasio();
 
-	}
+		            int codigoEmpleado = Integer.parseInt(textField.getText());
+		            
+		            String zonaText = textField_1.getText();
+
+		            Zona nuevaZona = gimnasio.getZonas().stream()
+		                                     .filter(z -> z.getNombre().equalsIgnoreCase(zonaText))
+		                                     
+		                                     .findFirst()
+		                                     
+		                                     .orElse(null);
+
+		            if (nuevaZona == null) {
+		                
+		                System.out.println("Zona no encontrada.");
+		                
+		                JOptionPane.showMessageDialog(JOptionPane.getFrameForComponent(btnCambiar), "Zona no encontrada");
+		                return;
+		            }
+
+		            CambiarZonaMonitorControladorInterfaz controlador = new CambiarZonaMonitorControlador();
+		            
+		            int codigo = controlador.existeEmpleado(codigoEmpleado);
+
+		            if (codigo == -1) {
+		                
+		                System.out.println("Empleado no encontrado.");
+		                
+		                JOptionPane.showMessageDialog(JOptionPane.getFrameForComponent(btnCambiar), "Empleado no encontrado");
+		                
+		            } else {
+		                
+		                System.out.println("Empleado encontrado con código " + codigo);
+		                
+		                int n = JOptionPane.showConfirmDialog(JOptionPane.getFrameForComponent(btnCambiar),
+		                        "¿Estás seguro de cambiar la zona del empleado con código " + codigo + " a " + nuevaZona.getNombre() + "?",
+		                        "Cambiar zona del empleado", JOptionPane.YES_NO_OPTION);
+
+		                if (n == JOptionPane.YES_OPTION) {
+		                    
+		                    controlador.cambiarZonaMonitor(codigo, nuevaZona);
+
+		                    textField.setText("");
+		                    
+		                    textField_1.setText("");
+		                    
+		                    errorNewLabel.setText("Cambio finalizado");
+		                    
+		                }
+		            }
+		        } 
+		        catch (NumberFormatException ex) {
+		        
+		            System.out.println("Formato incorrecto");
+		            
+		            errorNewLabel.setText("Formato de texto incorrecto");
+		        
+		        }
+		    }
+		});
+	}	
 }

@@ -6,7 +6,7 @@ public class MostrarSupervisoresControlador implements MostrarSupervisoresContro
 
 	private APIBolifit api=APIBolifit.getInstance();
 	
-	public String[] mostrarSupervisores() {
+	public String[][] mostrarSupervisores() {
 		
 		return api.obtenerSupervisorOrdenadosNombre();
 	}

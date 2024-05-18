@@ -6,7 +6,7 @@ public class MostrarAfiliadosPremiumControlador implements MostrarAfiliadosPremi
 
 	private APIBolifit api=APIBolifit.getInstance();
 	
-	public String[] mostrarAfiliadosPremium() {
+	public String[][] mostrarAfiliadosPremium() {
 		
 		return api.obtenerAfiliadosPremium();
 	}

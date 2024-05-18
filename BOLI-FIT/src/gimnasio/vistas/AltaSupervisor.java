@@ -1,8 +1,14 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
+import gimnasio.controlador.AltaSupervisorControlador;
+import gimnasio.controlador.AltaSupervisorControladorInterfaz;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -70,6 +76,49 @@ public class AltaSupervisor extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
 		lblNewLabel.setBounds(0, 0, 680, 486);
 		add(lblNewLabel);
+		
+		JLabel errorNewLabel = new JLabel("");
+		errorNewLabel.setForeground(Color.green);
+		errorNewLabel.setBounds(79, 239, 319, 34);
+		add(errorNewLabel);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					AltaSupervisorControladorInterfaz controlador=new AltaSupervisorControlador();
+					
+					String dni=textField.getText();
+					
+					String nombre=textField_1.getText();
+					
+					double productividad=Double.parseDouble(textField_2.getText());
+					
+					controlador.altaSupervisor(dni, nombre, productividad);
+					
+					errorNewLabel.setText("Alta Finalizada");
+					
+					textField.setText("");
+		            
+		            textField_1.setText("");
+		            
+		            textField_2.setText("");
+					
+				}
+				catch(NumberFormatException ex) {
+					
+					System.out.println("Formato incorrecto");
+					
+					errorNewLabel.setText("Formato numero incorrecto");
+				}
+					
+				
+			}
+			
+			
+		});
 
 	}
 

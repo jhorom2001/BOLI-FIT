@@ -6,7 +6,7 @@ public class MostrarAfiliadosBasicosControlador implements MostrarAfiliadosBasic
 
 	private APIBolifit api=APIBolifit.getInstance();
 	
-	public String[] mostrarAfiliadosBasicos() {
+	public String[][] mostrarAfiliadosBasicos() {
 		
 		return api.obtenerAfiliadosBasicos();
 		

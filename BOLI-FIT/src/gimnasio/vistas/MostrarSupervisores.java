@@ -1,6 +1,11 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import gimnasio.controlador.MostrarSupervisoresControlador;
+import gimnasio.controlador.MostrarSupervisoresControladorInterfaz;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -14,22 +19,35 @@ public class MostrarSupervisores extends JPanel {
 	public MostrarSupervisores() {
 		setLayout(null);
 		
-		JLabel lblSup = new JLabel("SUPERVISORES");
-		lblSup.setForeground(Color.WHITE);
-		lblSup.setFont(new Font("Arial Narrow", Font.BOLD, 33));
-		lblSup.setBounds(214, 32, 215, 36);
-		add(lblSup);
+		JLabel tituloNewLabel = new JLabel("MOSTRAR SUPERVISORES");
 		
-		JLabel lblCodigodninombresueldozona = new JLabel("CODIGO--NOMBRE--SUELDO--PRODUCTIVIDAD");
-		lblCodigodninombresueldozona.setForeground(Color.WHITE);
-		lblCodigodninombresueldozona.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblCodigodninombresueldozona.setBounds(45, 101, 482, 43);
-		add(lblCodigodninombresueldozona);
+		tituloNewLabel.setFont(new Font("Sitka Subheading", Font.PLAIN, 18));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
-		lblNewLabel.setBounds(-15, -24, 702, 492);
-		add(lblNewLabel);
+		tituloNewLabel.setBounds(120, 0, 166, 28);
+		
+		add(tituloNewLabel);
+		
+		
+		MostrarSupervisoresControladorInterfaz controlador=new MostrarSupervisoresControlador();
+		
+		String[][] supervisores=controlador.mostrarSupervisores();
+		
+		final String[] cabeceraTabla= {"CodigoEmpleado", "DNI", "Nombre", "Sueldo", "Productividad"};
+		
+		JTable tablaMonitores=new JTable(supervisores,cabeceraTabla) {
+			
+			public boolean isCellEditable(int row, int column) {
+				
+		            return false;
+		         }
+		};
+		
+		tablaMonitores.setGridColor(Color.BLACK);
+
+	
+		JScrollPane scrollPane = new JScrollPane(tablaMonitores);
+		scrollPane.setBounds(10, 32, 615, 222);
+		add(scrollPane);
 
 	}
 

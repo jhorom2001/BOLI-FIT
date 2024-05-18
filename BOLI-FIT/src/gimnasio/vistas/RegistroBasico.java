@@ -1,14 +1,23 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
+
+import gimnasio.controlador.AltaAfiliadoBasicoControlador;
+import gimnasio.controlador.AltaAfiliadoBasicoControladorInterfaz;
+import gimnasio.modelo.Zona;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
-public class Registro extends JPanel {
+public class RegistroBasico extends JPanel {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -19,7 +28,7 @@ public class Registro extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Registro() {
+	public RegistroBasico() {
 		setBackground(new Color(240, 240, 240));
 		setLayout(null);
 		
@@ -111,6 +120,62 @@ public class Registro extends JPanel {
 		lblNewLabel_2.setBounds(0, 0, 696, 469);
 		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
 		add(lblNewLabel_2);
+		
+		JLabel errorNewLabel = new JLabel("");
+		errorNewLabel.setForeground(Color.green);
+		errorNewLabel.setBounds(79, 239, 319, 34);
+		add(errorNewLabel);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					
+					AltaAfiliadoBasicoControladorInterfaz controlador=new AltaAfiliadoBasicoControlador();
+				
+					String dni=textField_1.getText();
+				
+					String nombre=textField_2.getText();
+				
+					String apellido = textField_3.getText();
+				
+					String telefono = textField_4.getText();
+					
+					String correo = textField_5.getText();
+					
+					String direccion = textField_6.getText();
+				
+					controlador.altaAfiliadoBasico(dni, nombre, apellido, telefono, correo, direccion);
+					
+					errorNewLabel.setText("Alta finalizada");
+		            
+		            textField_1.setText("");
+		            
+		            textField_2.setText("");
+		            
+		            textField_3.setText("");
+		            
+		            textField_4.setText("");
+		            
+		            textField_5.setText("");
+		            
+		            textField_6.setText("");
+					
+				}
+				catch(NumberFormatException ex) {
+					
+					System.out.println("Formato incorrecto");
+					
+					errorNewLabel.setText("Formato texto incorrecto");
+					
+				}
+			}
+			
+			
+		});
 
 	}
 }

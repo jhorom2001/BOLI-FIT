@@ -1,9 +1,19 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
+
+import gimnasio.controlador.BajaClienteControlador;
+import gimnasio.controlador.BajaClienteControladorInterfaz;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -43,6 +53,43 @@ public class DarBajaCliente extends JPanel {
 		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
 		lblNewLabel_2.setBounds(0, -21, 703, 511);
 		add(lblNewLabel_2);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("Boton baja");
+				
+				BajaClienteControladorInterfaz controlador=new BajaClienteControlador();
+				
+				int codigo=controlador.existeEmpleado(Integer.parseInt(textField.getText()));
+				
+				if (codigo==-1) {
+					
+					System.out.println("Cliente no encontrado.");
+					
+					JOptionPane.showMessageDialog(JOptionPane.getFrameForComponent(btnNewButton),"Cliente no encontrado");
+					
+				}
+				else {
+					System.out.println("Mensajero encontrado con codigo " + codigo );
+					
+					int n = JOptionPane.showConfirmDialog(JOptionPane.getFrameForComponent(btnNewButton), "¿Estas seguro de eliminar el cliente con codigo "+codigo+" ?", "Eliminar mensajero", JOptionPane.YES_NO_OPTION);
+					if (n==0) {
+						
+						controlador.bajaCliente(codigo);
+						
+						textField.setText("");
+						
+					}
+				}
+				
+				
+			}
+			
+			
+		});
 
 	}
 

@@ -1,17 +1,29 @@
 package gimnasio.modelo;
 
 import java.util.ArrayList;
+import gimnasio.modelo.*;
 
 public class APIBolifit {
 	
-	private static APIBolifit instancia=new APIBolifit();
+	private static APIBolifit instancia = new APIBolifit();
 	
-	private Gimnasio gimnasio;
+    private Gimnasio gimnasio;
+
+    private APIBolifit() {
+    	
+        gimnasio = new Gimnasio("Terra", "Madrid");
+        
+        gimnasio.annadirZona(new Zona("Cardio"));
+        
+        gimnasio.annadirZona(new Zona("Piscina"));
+        
+        gimnasio.annadirZona(new Zona("Musculacion"));
+		
+	}
 	
-	private APIBolifit() {
+	public Gimnasio getGimnasio() {
 		
-		gimnasio=new Gimnasio("Terra", "Madrid");
-		
+		return gimnasio;
 	}
 	
 	public static APIBolifit getInstance() {
@@ -74,221 +86,207 @@ public class APIBolifit {
 		
 	}
 	
-	public void cambiarZonaMonitor(int cod, String nomZona) {
+	public void cambiarZonaMonitor(int cod, Zona zona) {
 		
-		Monitor monitor=gimnasio.obtenerMonitorPorZona(cod);
-		
-		Zona zonaNueva=gimnasio.obtenerZona(nomZona);
-		
-		Zona zonaActual=monitor.getZona();
-		
-		
-		zonaNueva.annadirMonitor(monitor);
-		
-		zonaActual.borrarMonitor(monitor);
-		
-		monitor.setZona(zonaNueva);
-		
+	    Monitor monitor = gimnasio.obtenerMonitorPorZona(cod);
+	    
+	    Zona zonaNueva = gimnasio.obtenerZona(zona);
+	    
+	    Zona zonaActual = monitor.getZona();
+	    
+
+	    zonaNueva.annadirMonitor(monitor);
+	        
+	    zonaActual.borrarMonitor(monitor);
+	        
+	    monitor.setZona(zonaNueva);
+	        
 	}
 	
-	public String[] obtenerSupervisorOrdenadosNombre(){
+	public String[][] obtenerSupervisorOrdenadosNombre(){
 		
 		gimnasio.ordenarEmpleadoNombre();
 
-	    ArrayList<Empleado> empleados = gimnasio.getEmpleados();
-
-	    ArrayList<String> empleadosStringList = new ArrayList<>();
-
-	    for (Empleado empleado : empleados) {
+	    ArrayList<Empleado> supervisores = gimnasio.getEmpleados();
+	    
+	    String[][] S = new String[supervisores.size()][5];
+	    
+	    for (int i = 0; i < supervisores.size(); i++) {
 	    	
+	        Empleado empleado = supervisores.get(i);
+	        
+	        S[i][0] = String.valueOf(empleado.getCodigoEmpleado());
+	        
+	        S[i][1] = empleado.getDni();
+	        
+	        S[i][2] = empleado.getNombre();
+	        
+	        S[i][3] = String.valueOf(empleado.getSueldo()) + " euros";
+	        
 	        if (empleado instanceof Supervisor) {
 	        	
-	            Supervisor supervisor = (Supervisor) empleado;
+	            Supervisor superv = (Supervisor) empleado;
 	            
-	            String empleadoString = supervisor.getCodigoEmpleado() + "-" +
+	            S[i][4] = String.valueOf(superv.getProductividad());
 	            
-	                                    supervisor.getNombre() + "-" +
-	                                    
-	                                    supervisor.getSueldo() + "-" +
-	                                    
-	                                    supervisor.getProductividad() + "-";
-	            
-	            empleadosStringList.add(empleadoString);
 	        }
+	        
+	         else {
+	        	 
+	            S[i][4] = "";
+	            
+	         }
 	    }
-
-	    String[] empleadosStringArray = new String[empleadosStringList.size()];
 	    
-	    empleadosStringArray = empleadosStringList.toArray(empleadosStringArray);
-
-	    return empleadosStringArray;
+	    return S;
 	}
 	
-	public String[] obtenerMonitoresOrdenadosNombre() {
-	   
+	public String[][] obtenerMonitoresOrdenadosNombre() {
+		
 	    gimnasio.ordenarEmpleadoNombre();
 
-	    ArrayList<Empleado> empleados = gimnasio.getEmpleados();
-
-	    ArrayList<String> empleadosStringList = new ArrayList<>();
-
-	    for (Empleado empleado : empleados) {
+	    ArrayList<Empleado> monitores = gimnasio.getEmpleados();
+	    
+	    String[][] M = new String[monitores.size()][6];
+	    
+	    for (int i = 0; i < monitores.size(); i++) {
 	    	
+	        Empleado empleado = monitores.get(i);
+	        
+	        M[i][0] = String.valueOf(empleado.getCodigoEmpleado());
+	        
+	        M[i][1] = empleado.getDni();
+	        
+	        M[i][2] = empleado.getNombre();
+	        
+	        M[i][3] = String.valueOf(empleado.getSueldo()) + " euros";
+	        
 	        if (empleado instanceof Monitor) {
 	        	
 	            Monitor monitor = (Monitor) empleado;
 	            
-	            String empleadoString = monitor.getCodigoEmpleado() + "-" +
+	            M[i][4] = monitor.getZona().getNombre();
 	            
-	                                    monitor.getNombre() + "-" +
-	                                    
-	                                    monitor.getSueldo() + "-" +
-	                                    
-	                                    monitor.getZona().getNombre() + "-" +
-	                                    
-	                                    monitor.getAnnosContrato() + "-";
+	            M[i][5] = String.valueOf(monitor.getAnnosContrato());
 	            
-	            empleadosStringList.add(empleadoString);
+	        } else {
+	            M[i][4] = "";
+	            
+	            M[i][5] = "";
 	        }
 	    }
-
-	    String[] empleadosStringArray = new String[empleadosStringList.size()];
 	    
-	    empleadosStringArray = empleadosStringList.toArray(empleadosStringArray);
-
-	    return empleadosStringArray;
+	    return M;
 	}
 	
-	public String[] obtenerAfiliadosBasicos() {
+	public String[][] obtenerAfiliadosBasicos() {
 
-	    ArrayList<Cliente> clientes = gimnasio.getClientes();
-
-	    ArrayList<String> clientesStringList = new ArrayList<String>();
-
-	    for (Cliente cliente : clientes) {
-	    	
-	        if (cliente instanceof AfiliadoBasico) {
-	        	
-	            AfiliadoBasico AF = (AfiliadoBasico) cliente;
-	            
-	            String clienteString = AF.getCodigoCliente() + "-" +
-	            
-	                                    AF.getDni() + "-" +
-	                                    
-	                                    AF.getNombre() + "-" +
-	                                    
-	                                    AF.getApellido() + "-" +
-	                                    
-	                                    AF.getNumTelefono() + "-" +
-	            
-	            						AF.getCorreoElectronico() + "-" +
-	            						
-	            						AF.getDireccion() + "-" +
-	            						
-	            						AF.getCosteMensual() + "-" + 
-	            						
-	            						AF.isVentajas();
-	            						
-	            
-	            clientesStringList.add(clienteString);
-	        }
-	    }
-
-	    String[] clientesStringArray = new String[clientesStringList.size()];
-	    
-	    clientesStringArray = clientesStringList.toArray(clientesStringArray);
-
-	    return clientesStringArray;
+		    ArrayList<Cliente> clientes = gimnasio.getClientes();
+		    
+		    String[][] AB = new String[clientes.size()][7];
+		    
+		    for (int i = 0; i < clientes.size(); i++) {
+		    	
+		        Cliente cliente = clientes.get(i);
+		        
+		        AB[i][0] = String.valueOf(cliente.getCodigoCliente());
+		        
+		        AB[i][1] = cliente.getDni();
+		        
+		        AB[i][2] = cliente.getNombre();
+		        
+		        AB[i][3] = cliente.getApellido();
+		        
+		        AB[i][4] = cliente.getNumTelefono();
+		        
+		        AB[i][5] = cliente.getCorreoElectronico();
+		        
+		        AB[i][6] = cliente.getDireccion();
+		        
+		    }
+		    
+		    return AB;
 	}
 	
-	public String[] obtenerAfiliadosEstandar() {
+	public String[][] obtenerAfiliadosEstandar() {
 
-	    ArrayList<Cliente> clientes = gimnasio.getClientes();
-
-	    ArrayList<String> clientesStringList = new ArrayList<String>();
-
-	    for (Cliente cliente : clientes) {
-	    	
-	        if (cliente instanceof AfiliadoEstandar) {
-	        	
-	            AfiliadoEstandar AE = (AfiliadoEstandar) cliente;
-	            
-	            String clienteString = AE.getCodigoCliente() + "-" +
-	            
-	                                    AE.getDni() + "-" +
-	                                    
-	                                    AE.getNombre() + "-" +
-	                                    
-	                                    AE.getApellido() + "-" +
-	                                    
-	                                    AE.getNumTelefono() + "-" +
-	            
-	            						AE.getCorreoElectronico() + "-" +
-	            					
-	            						AE.getDireccion() + "-" +
-	            						
-	            						AE.isZonaBoxeo() + "-" + 
-	            						
-	            						AE.getCostePrimerPago() + "-" +
-	            						
-	            						AE.getCosteSegundoPago() + "-" + 
-	            						
-	            						AE.getCosteAnual();
-	            						
-	            
-	            clientesStringList.add(clienteString);
-	        }
-	    }
-
-	    String[] clientesStringArray = new String[clientesStringList.size()];
+		ArrayList<Cliente> clientes = gimnasio.getClientes();
 	    
-	    clientesStringArray = clientesStringList.toArray(clientesStringArray);
-
-	    return clientesStringArray;
+	    String[][] AE = new String[clientes.size()][9];
+	    
+	    for (int i = 0; i < clientes.size(); i++) {
+	    	
+	        AfiliadoEstandar cliente = (AfiliadoEstandar) clientes.get(i);
+	        
+	        AE[i][0] = String.valueOf(cliente.getCodigoCliente());
+	        
+	        AE[i][1] = cliente.getDni();
+	        
+	        AE[i][2] = cliente.getNombre();
+	        
+	        AE[i][3] = cliente.getApellido();
+	        
+	        AE[i][4] = cliente.getNumTelefono();
+	        
+	        AE[i][5] = cliente.getCorreoElectronico();
+	        
+	        AE[i][6] = cliente.getDireccion();
+	        
+	        AE[i][7] = String.valueOf(cliente.getCosteAnual());
+	        
+            AE[i][8] = String.valueOf(cliente.isZonaBoxeo());
+	        
+	    }
+	    
+	    return AE;
 	}
 	
-	public String[] obtenerAfiliadosPremium() {
+	public String[][] obtenerAfiliadosPremium() {
 
-	    ArrayList<Cliente> clientes = gimnasio.getClientes();
-
-	    ArrayList<String> clientesStringList = new ArrayList<String>();
-
-	    for (Cliente cliente : clientes) {
-	    	
-	        if (cliente instanceof AfiliadoPremium) {
-	        	
-	            AfiliadoPremium AP = (AfiliadoPremium) cliente;
-	            
-	            String clienteString = AP.getCodigoCliente() + "-" +
-	            
-	                                    AP.getDni() + "-" +
-	                                    
-	                                    AP.getNombre() + "-" +
-	                                    
-	                                    AP.getApellido() + "-" +
-	                                    
-	                                    AP.getNumTelefono() + "-" +
-	            
-	            						AP.getCorreoElectronico() + "-" +
-	            						
-	            						AP.getDireccion() + "-" +
-	            						
-	            						AP.isPiscina() + "-" + 
-	            						
-	            						AP.isMerchandisingGratis() + "-" +
-	            						
-	            						AP.getCosteAnual();
-	            						
-	            
-	            clientesStringList.add(clienteString);
-	        }
-	    }
-
-	    String[] clientesStringArray = new String[clientesStringList.size()];
+		ArrayList<Cliente> clientes = gimnasio.getClientes();
 	    
-	    clientesStringArray = clientesStringList.toArray(clientesStringArray);
-
-	    return clientesStringArray;
+	    String[][] AP = new String[clientes.size()][10];
+	    
+	    for (int i = 0; i < clientes.size(); i++) {
+	    	
+	        AfiliadoPremium cliente = (AfiliadoPremium) clientes.get(i);
+	        
+	        AP[i][0] = String.valueOf(cliente.getCodigoCliente());
+	        
+	        AP[i][1] = cliente.getDni();
+	        
+	        AP[i][2] = cliente.getNombre();
+	        
+	        AP[i][3] = cliente.getApellido();
+	        
+	        AP[i][4] = cliente.getNumTelefono();
+	        
+	        AP[i][5] = cliente.getCorreoElectronico();
+	        
+	        AP[i][6] = cliente.getDireccion();
+	        
+	        AP[i][7] = String.valueOf(cliente.isPiscina());
+	        
+            AP[i][8] = String.valueOf(cliente.isMerchandisingGratis());
+            
+            AP[i][9] = String.valueOf(cliente.getCosteAnual());
+            
+	        
+	    }
+	    
+	    return AP;
+	}
+	
+	public int buscarEmpleado(int cod) {
+		
+		return gimnasio.buscarEmpleado(cod);
+		
+	}
+	
+	public int buscarCliente(int cod) {
+		
+		return gimnasio.buscarCliente(cod);
+		
 	}
 
 

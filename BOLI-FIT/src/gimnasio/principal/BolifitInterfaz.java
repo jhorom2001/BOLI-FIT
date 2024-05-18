@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gimnasio.vistas.AltaEmpleadoMonito;
+import gimnasio.vistas.AltaEmpleadoMonitor;
 import gimnasio.vistas.AltaSupervisor;
 import gimnasio.vistas.BajaEmpleado;
 import gimnasio.vistas.CambiarMonitorZona;
@@ -17,7 +17,7 @@ import gimnasio.vistas.MostrarClientesPremium;
 import gimnasio.vistas.MostrarMonitores;
 import gimnasio.vistas.MostrarSupervisores;
 import gimnasio.vistas.NosotrosSomos;
-import gimnasio.vistas.Registro;
+import gimnasio.vistas.RegistroBasico;
 import gimnasio.vistas.RegistroEstandar;
 import gimnasio.vistas.RegistroPremium;
 
@@ -195,7 +195,7 @@ public class BolifitInterfaz extends JFrame implements ActionListener {
 			setVisible(true);
 		}
 		else if (e.getSource()== mnItem)  {
-			Registro registroVista = new Registro();
+			RegistroBasico registroVista = new RegistroBasico();
 			setContentPane(registroVista);
 			setVisible(true);
 		}
@@ -210,7 +210,7 @@ public class BolifitInterfaz extends JFrame implements ActionListener {
 			setVisible(true);
 		}
 		else if (e.getSource()== mntmNewMenuItem) {
-			AltaEmpleadoMonito altaempleadovista = new AltaEmpleadoMonito();
+			AltaEmpleadoMonitor altaempleadovista = new AltaEmpleadoMonitor();
 			setContentPane(altaempleadovista);
 			setVisible(true);
 		}

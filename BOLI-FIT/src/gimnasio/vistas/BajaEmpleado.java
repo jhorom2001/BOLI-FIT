@@ -1,9 +1,19 @@
 package gimnasio.vistas;
 
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
+
+import gimnasio.controlador.BajaEmpleadoControlador;
+import gimnasio.controlador.BajaEmpleadoControladorInterfaz;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -44,6 +54,43 @@ public class BajaEmpleado extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
 		lblNewLabel.setBounds(0, 0, 672, 479);
 		add(lblNewLabel);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("Boton baja");
+				
+				BajaEmpleadoControladorInterfaz controlador=new BajaEmpleadoControlador();
+				
+				int codigo=controlador.existeEmpleado(Integer.parseInt(textField.getText()));
+				
+				if (codigo==-1) {
+					
+					System.out.println("Empleado no encontrado.");
+					
+					JOptionPane.showMessageDialog(JOptionPane.getFrameForComponent(btnNewButton),"Empleado no encontrado");
+					
+				}
+				else {
+					System.out.println("Mensajero encontrado con codigo " + codigo );
+					
+					int n = JOptionPane.showConfirmDialog(JOptionPane.getFrameForComponent(btnNewButton), "¿Estas seguro de borrar el Empleado con codigo "+codigo+" ?", "Eliminar mensajero", JOptionPane.YES_NO_OPTION);
+					if (n==0) {
+						
+						controlador.eliminarEmpleado(codigo);
+						
+						textField.setText("");
+						
+					}
+				}
+				
+				
+			}
+			
+			
+		});
 
 	}
 

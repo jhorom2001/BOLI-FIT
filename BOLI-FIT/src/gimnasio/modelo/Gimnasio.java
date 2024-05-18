@@ -113,11 +113,11 @@ public class Gimnasio {
 		return null;
 	}
 	
-	public Zona obtenerZona(String nombre) {
+	public Zona obtenerZona(Zona zona) {
 		
 		for(Zona z: zonas) {
 			
-			if(z.getNombre().equalsIgnoreCase(nombre)) {
+			if(z.getNombre().equalsIgnoreCase(zona.getNombre())) {
 				
 				return z;
 				
@@ -177,6 +177,30 @@ public class Gimnasio {
 		
 		Collections.sort(empleados);
 		
+	}
+	
+	public int buscarEmpleado(int codigo) {
+		
+		for(Empleado e: empleados) {
+			
+			if(e.getCodigoEmpleado()==codigo) {
+				
+				return e.getCodigoEmpleado();
+			}
+		}
+		return -1;
+	}
+	
+	public int buscarCliente(int codigo) {
+		
+		for(Cliente c: clientes) {
+			
+			if(c.getCodigoCliente()==codigo) {
+				
+				return c.getCodigoCliente();
+			}
+		}
+		return -1;
 	}
 
 	public String toString() {
