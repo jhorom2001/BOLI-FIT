@@ -53,7 +53,7 @@ public class BolifitInterfaz extends JFrame implements ActionListener {
 	private JMenuItem mntmNewMenuItem_10;
 	private JMenuItem mntmNewMenuItem_12;
 	private JMenuItem mntmNewMenuItem_11;
-	
+	private JMenuItem mntmNewMenuItem_5;
 	/**
 	 * Create the frame.
 	 */
@@ -170,9 +170,11 @@ public class BolifitInterfaz extends JFrame implements ActionListener {
 		mnNewMenu_1.setFont(new Font("Arial Narrow", Font.BOLD | Font.ITALIC, 20));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Salir");
+		mntmNewMenuItem_5 = new JMenuItem("Salir");
 		mntmNewMenuItem_5.setFont(new Font("Georgia", Font.PLAIN, 13));
 		mnNewMenu_1.add(mntmNewMenuItem_5);
+		mntmNewMenuItem_5.addActionListener(this);
+		
 		
 		JLabel lblFondo = new JLabel("New label");
 		lblFondo.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
@@ -259,6 +261,9 @@ public class BolifitInterfaz extends JFrame implements ActionListener {
 			setContentPane(mostrarsupervisoresvista);
 			setVisible(true);
 		}
+		else if (e.getSource() == mntmNewMenuItem_5) {  
+            System.exit(0);  
+        }
 		else {
 			System.out.println("Otros");
 		}
