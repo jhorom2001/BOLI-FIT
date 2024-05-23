@@ -30,7 +30,7 @@ public class MostrarClientesPremium extends JPanel {
 		add(tituloNewLabel);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
+		lblNewLabel.setIcon(new ImageIcon("img\\sgf.png"));
 		lblNewLabel.setBounds(0, -20, 674, 498);
 		add(lblNewLabel);
 		

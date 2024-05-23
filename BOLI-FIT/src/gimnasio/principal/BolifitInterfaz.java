@@ -177,7 +177,7 @@ public class BolifitInterfaz extends JFrame implements ActionListener {
 		
 		
 		JLabel lblFondo = new JLabel("New label");
-		lblFondo.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
+		lblFondo.setIcon(new ImageIcon("img\\imagennnnn.png"));
 		lblFondo.setBounds(-30, -211, 919, 812);
 		contentPane.add(lblFondo);
 		

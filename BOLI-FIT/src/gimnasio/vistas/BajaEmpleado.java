@@ -51,7 +51,7 @@ public class BajaEmpleado extends JPanel {
 		add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
+		lblNewLabel.setIcon(new ImageIcon("img\\imagennnnn.png"));
 		lblNewLabel.setBounds(0, 0, 672, 479);
 		add(lblNewLabel);
 		

@@ -73,7 +73,7 @@ public class AltaSupervisor extends JPanel {
 		add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\imagennnnn.png"));
+		lblNewLabel.setIcon(new ImageIcon("img\\imagennnnn.png"));
 		lblNewLabel.setBounds(0, 0, 680, 486);
 		add(lblNewLabel);
 		

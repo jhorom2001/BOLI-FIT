@@ -118,7 +118,7 @@ public class RegistroBasico extends JPanel {
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setBounds(0, 0, 696, 469);
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
+		lblNewLabel_2.setIcon(new ImageIcon("img\\sgf.png"));
 		add(lblNewLabel_2);
 		
 		JLabel errorNewLabel = new JLabel("");

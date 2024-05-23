@@ -141,7 +141,7 @@ public class RegistroEstandar extends JPanel {
 		add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
+		lblNewLabel.setIcon(new ImageIcon("img\\sgf.png"));
 		lblNewLabel.setBounds(0, 0, 670, 463);
 		add(lblNewLabel);
 		

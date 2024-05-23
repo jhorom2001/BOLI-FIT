@@ -31,7 +31,7 @@ public class MostrarClientesEstandar extends JPanel {
 		
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
+		lblNewLabel.setIcon(new ImageIcon("img\\sgf.png"));
 		lblNewLabel.setBounds(-13, -27, 713, 506);
 		add(lblNewLabel);
 		

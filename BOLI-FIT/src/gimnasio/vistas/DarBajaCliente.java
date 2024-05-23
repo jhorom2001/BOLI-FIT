@@ -50,7 +50,7 @@ public class DarBajaCliente extends JPanel {
 		add(btnNewButton);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Alu1DAM02\\Pictures\\sgf.png"));
+		lblNewLabel_2.setIcon(new ImageIcon("img\\sgf.png"));
 		lblNewLabel_2.setBounds(0, -21, 703, 511);
 		add(lblNewLabel_2);
 		
